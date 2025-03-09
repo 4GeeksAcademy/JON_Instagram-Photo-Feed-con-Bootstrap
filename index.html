@@ -1,65 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <!--
+      Archivo: Instagram-Photo-Feed-con-Bootstrap
+      Este documento simula un feed de Instagram con dos vistas:
+      - "Grid": Una cuadrícula de 9 imágenes organizadas en 3 columnas por fila.
+      - "Square": Publicaciones individuales (cards) dispuestas verticalmente, simulando una vista móvil.
+    -->
+
+    <!-- Declaración del tipo de documento HTML5 -->
+    <meta charset="UTF-8" /> 
+    <!-- Define la codificación de caracteres a UTF-8 para mostrar correctamente caracteres especiales -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CSS Bootstrap -->
+    <!-- Hace que la página se adapte al ancho del dispositivo, lo que la hace responsiva en móviles -->
+
+    <!-- Inclusión de la hoja de estilos de Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Bootstrap proporciona estilos predefinidos y un sistema de grillas para un diseño responsivo -->
+
+    <!-- Inclusión de Font Awesome para usar iconos, por ejemplo, el logo de Instagram -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <!-- Iconos de Bootstrap -->
+
+    <!-- Inclusión de Bootstrap Icons para otros iconos, como el de configuración -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
     />
+
+    <!-- Título de la página que se muestra en la pestaña del navegador -->
     <title>Instagram-Photo-Feed-con-Bootstrap</title>
+
+    <!-- Estilos personalizados para este documento -->
     <style>
-      /* Fija la altura de las imágenes a 300px, ancho al 100% de su contenedor y recorta sin deformar */
+      /* 
+        Clase .img-grid:
+        - Fija la altura de las imágenes a 400px.
+        - Ajusta el ancho al 100% del contenedor.
+        - Usa object-fit: cover para que la imagen se recorte proporcionalmente sin distorsionarse.
+      */
       .img-grid {
-        height: 300px;
+        height: 400px;
         width: 100%;
         object-fit: cover;
       }
     </style>
   </head>
+
   <body>
-    <!-- Navbar principal -->
+    <!-- ===================================================== -->
+    <!-- Navbar Principal: Barra de navegación superior          -->
+    <!-- ===================================================== -->
     <nav class="navbar navbar-expand-lg navbar-light">
+      <!-- Contenedor para centrar el contenido de la navbar con fondo claro y padding vertical -->
       <div class="container bg-light py-2">
+        <!-- Marca o logo de la aplicación con un icono de Instagram -->
         <a class="navbar-brand ms-4" href="#">
+          <!-- Icono de Instagram (Font Awesome) seguido del texto "Instagram" -->
           <i class="fa-brands fa-instagram"></i> Instagram
         </a>
+
+        <!-- Contenedor para los elementos que se alinean a la derecha -->
         <div class="ms-auto d-flex align-items-center">
-          <button class="btn btn-success me-4">Create a New Post</button>
+          <!-- Botón para abrir el modal de "Create a New Post" -->
+          <button
+            class="btn btn-success me-4"
+            data-bs-toggle="modal"
+            data-bs-target="#newPostModal"
+          >
+            Create a New Post
+          </button>
+
+          <!-- Modal para crear una nueva publicación -->
+          <div
+            class="modal fade"
+            id="newPostModal"
+            tabindex="-1"
+            aria-labelledby="newPostModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <!-- Encabezado del modal -->
+                <div class="modal-header">
+                  <!-- Título del modal -->
+                  <h5 class="modal-title" id="newPostModalLabel">
+                    Create a new post
+                  </h5>
+                  <!-- Botón para cerrar el modal -->
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <!-- Cuerpo del modal con un formulario -->
+                <div class="modal-body">
+                  <form>
+                    <!-- Campo para ingresar la descripción (caption) de la publicación -->
+                    <div class="mb-3">
+                      <label for="postCaption" class="form-label">
+                        <strong>Caption:</strong>
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id="postCaption"
+                        rows="3"
+                        placeholder="Add the caption of your post here"
+                      ></textarea>
+                    </div>
+                    <!-- Sección que muestra iconos (cámara y ubicación) -->
+                    <div class="mb-3">
+                      <i class="fa-solid fa-camera me-3"></i>
+                      <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                  </form>
+                </div>
+                <!-- Pie del modal con botones para cerrar o publicar -->
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">Publish</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown: Menú desplegable para opciones de usuario (perfil, privacidad, logout, etc.) -->
           <div class="dropdown">
+            <!-- Botón que activa el dropdown -->
             <button
               class="btn btn-secondary dropdown-toggle me-5"
               type="button"
               data-bs-toggle="dropdown"
             >
+              <!-- Icono de engranaje (configuración) usando Bootstrap Icons -->
               <i class="bi bi-gear"></i>
             </button>
+            <!-- Menú desplegable, alineado a la derecha -->
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><a class="dropdown-item" href="#">Accesibility</a></li>
               <li><a class="dropdown-item" href="#">Privacy and Data</a></li>
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item text-danger" href="#">Log out</a></li>
+              <li>
+                <a class="dropdown-item text-danger" href="#">Log out</a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
 
-    <!-- Navegación de pestañas -->
+    <!-- ===================================================== -->
+    <!-- Navegación de Pestañas: Alterna entre vistas Grid y Square -->
+    <!-- ===================================================== -->
     <nav>
       <div class="container">
         <ul class="nav nav-tabs justify-content-center">
+          <!-- Pestaña para la vista Grid, activa por defecto -->
           <button
             class="nav-link active"
             id="grid-tab"
@@ -68,6 +179,7 @@
           >
             <i class="bi bi-grid-3x3-gap"></i>
           </button>
+          <!-- Pestaña para la vista Square -->
           <li class="nav-item">
             <button
               class="nav-link"
@@ -82,199 +194,273 @@
       </div>
     </nav>
 
-    <!-- Contenedor común de pestañas -->
+    <!-- ===================================================== -->
+    <!-- Contenedor Común de Pestañas: Paneles de contenido para cada vista -->
+    <!-- ===================================================== -->
     <div class="container py-3">
       <div class="tab-content">
-        <!-- Panel para la vista Grid (9 imágenes en 3 columnas por fila) -->
+        <!-- Panel para la vista Grid: Cuadrícula de imágenes -->
         <div class="tab-pane fade show active" id="grid-content">
           <div class="row g-2">
-            <!-- Cada imagen ocupa 4 de 12 columnas (3 columnas por fila) -->
+            <!-- Cada div con clase col-md-4 representa una columna en la grilla (3 columnas por fila) -->
             <div class="col-md-4">
               <img
                 src="https://www.paradas.es/export/sites/paradas/.galleries/imagenes-noticias-test/futbol_1576149772602.jpg"
                 class="img-fluid img-grid"
                 alt="Imagen 1"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
                 src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
                 class="img-fluid img-grid"
                 alt="Imagen 2"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
-                src="https://imagenes.20minutos.es/files/image_640_auto/uploads/imagenes/2025/02/24/nothing-phone-3a-series.png"
+                src="https://media.istockphoto.com/id/1266939032/es/foto/una-persona-en-un-espacio-arquitect%C3%B3nico-abstracto-curvo-rojo-representaci%C3%B3n-3d.jpg?s=612x612&w=0&k=20&c=rICdLX2m8srmHg15PruSKMQgd9Pq01PPfa15WPPWhjg="
                 class="img-fluid img-grid"
                 alt="Imagen 3"
-              >
+              />
             </div>
+            <!-- Segunda fila de imágenes -->
             <div class="col-md-4">
               <img
-                src="https://imagenes.20minutos.es/files/image_640_auto/uploads/imagenes/2025/02/24/nothing-phone-3a-series.png"
+                src="https://media.istockphoto.com/id/2167996762/es/foto/flamingos-on-lake.jpg?s=612x612&w=0&k=20&c=7hmboFhNpYmbig9YtNBJdrcYgcR4_uIL90WiepXK6R0="
                 class="img-fluid img-grid"
                 alt="Imagen 4"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
-                src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
+                src="https://media.istockphoto.com/id/2166737855/es/foto/juvenile-flamingos.jpg?s=612x612&w=0&k=20&c=CENY-fNvukd4kyKvAIpJIpCt6bv3ZLLVh77qcW9yc2k="
                 class="img-fluid img-grid"
                 alt="Imagen 5"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
-                src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
+                src="https://media.istockphoto.com/id/2163211455/es/foto/a-side-profile-of-a-white-head-with-colorful-lines-of-paint-flowing-out-of-it-therapeutic.jpg?s=612x612&w=0&k=20&c=NM21zX3Y2788LwP4SB_hVUoSwObqLx9uG42ZtvdiiAE="
                 class="img-fluid img-grid"
                 alt="Imagen 6"
-              >
+              />
             </div>
+            <!-- Tercera fila de imágenes -->
             <div class="col-md-4">
               <img
-                src="https://www.paradas.es/export/sites/paradas/.galleries/imagenes-noticias-test/futbol_1576149772602.jpg"
+                src="https://media.istockphoto.com/id/2045181608/es/foto/two-middle-aged-diverse-couples-on-staycation-in-delft.jpg?s=612x612&w=0&k=20&c=olsJZUCxOkiCzJKJTBI7mefeJWBwq0Q2PmkAIAIPx-M="
                 class="img-fluid img-grid"
                 alt="Imagen 7"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
-                src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
+                src="https://media.istockphoto.com/id/2150167174/es/foto/woman-hiking-near-limmerensee-lake-in-swiss-alps.jpg?s=612x612&w=0&k=20&c=pjdQrUWooDVRp4-O6k_fvFOsImVdWnHD0BG0gB2K0ok="
                 class="img-fluid img-grid"
                 alt="Imagen 8"
-              >
+              />
             </div>
             <div class="col-md-4">
               <img
-                src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
+                src="https://media.istockphoto.com/id/1499143152/es/foto/secado-de-varita-de-incienso-en-vietnam.jpg?s=612x612&w=0&k=20&c=K5tkeGC3-mfq9h2YTLnKHH19gl5oBFq1ESpS3OC7_yE="
                 class="img-fluid img-grid"
                 alt="Imagen 9"
-              >
+              />
             </div>
           </div>
         </div>
 
-        <!-- Panel para la vista Square (cards verticales, centradas y con ancho limitado) -->
+        <!-- Panel para la vista Square: Publicaciones en formato de tarjetas (cards) -->
         <div class="tab-pane fade" id="square-content">
           <div class="row g-2">
-            <!-- Cada card se envuelve en una columna completa para forzar el apilado vertical -->
+            <!-- Card 1: Publicación "Gol de la Victoria" -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
+                <!-- Encabezado de la card con título y fecha -->
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Gol de la Victoria</h5>
+                  <span class="text-muted">03/25</span>
                 </div>
+                <!-- Imagen de la publicación -->
                 <img
-                  src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  src="https://www.paradas.es/export/sites/paradas/.galleries/imagenes-noticias-test/futbol_1576149772602.jpg"
+                  class="card-img-top"
+                  alt="Imagen 1"
+                />
+                <!-- Cuerpo de la card con likes y descripción -->
                 <div class="card-body">
                   <p class="text-muted">Likes: 123</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    Una jugada espectacular que define el partido.
                   </p>
                 </div>
               </div>
             </div>
 
-            <!-- Se repite el bloque para las demás publicaciones -->
+            <!-- Card 2: Publicación "Ternura Perruna" -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Ternura Perruna</h5>
+                  <span class="text-muted">03/29</span>
                 </div>
                 <img
                   src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  class="card-img-top"
+                  alt="Imagen 2"
+                />
                 <div class="card-body">
-                  <p class="text-muted">Likes: 123</p>
+                  <p class="text-muted">Likes: 4.5k</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    La inocencia y alegría de un adorable beagle.
                   </p>
                 </div>
               </div>
             </div>
 
+            <!-- Card 3: Publicación "Arte Urbano" -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Arte Urbano</h5>
+                  <span class="text-muted">12/20</span>
                 </div>
                 <img
-                  src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  src="https://media.istockphoto.com/id/1266939032/es/foto/una-persona-en-un-espacio-arquitect%C3%B3nico-abstracto-curvo-rojo-representaci%C3%B3n-3d.jpg?s=612x612&w=0&k=20&c=rICdLX2m8srmHg15PruSKMQgd9Pq01PPfa15WPPWhjg="
+                  class="card-img-top"
+                  alt="Imagen 3"
+                />
                 <div class="card-body">
-                  <p class="text-muted">Likes: 123</p>
+                  <p class="text-muted">Likes: 45k</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    Un espacio arquitectónico abstracto que inspira creatividad.
                   </p>
                 </div>
               </div>
             </div>
 
+            <!-- Card 4: Publicación "Encanto Natural" (Imagen 4) -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Encanto Natural</h5>
+                  <span class="text-muted">12/07</span>
                 </div>
                 <img
-                  src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  src="https://media.istockphoto.com/id/2167996762/es/foto/flamingos-on-lake.jpg?s=612x612&w=0&k=20&c=7hmboFhNpYmbig9YtNBJdrcYgcR4_uIL90WiepXK6R0="
+                  class="card-img-top"
+                  alt="Imagen 4"
+                />
                 <div class="card-body">
-                  <p class="text-muted">Likes: 123</p>
+                  <p class="text-muted">Likes: 1.1k</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    La elegancia de los flamencos en un tranquilo lago.
                   </p>
                 </div>
               </div>
             </div>
 
+            <!-- Card 5: Publicación "Encanto Natural" (Imagen 5) -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Encanto Natural</h5>
+                  <span class="text-muted">12/21</span>
                 </div>
                 <img
-                  src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  src="https://media.istockphoto.com/id/2166737855/es/foto/juvenile-flamingos.jpg?s=612x612&w=0&k=20&c=CENY-fNvukd4kyKvAIpJIpCt6bv3ZLLVh77qcW9yc2k="
+                  class="card-img-top"
+                  alt="Imagen 5"
+                />
                 <div class="card-body">
-                  <p class="text-muted">Likes: 123</p>
+                  <p class="text-muted">Likes: 35k</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    Los flamencos en un tranquilo lago
                   </p>
                 </div>
               </div>
             </div>
 
+            <!-- Card 6: Publicación "Explosión de Color" -->
             <div class="col-12 d-flex justify-content-center mb-3">
-              <div class="card" style="max-width: 300px;">
+              <div class="card" style="max-width: 600px">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="mb-0">Título de la Publicación</h5>
-                  <span class="text-muted">12/03/2025</span>
+                  <h5 class="mb-0">Explosión de Color</h5>
+                  <span class="text-muted">12/25</span>
                 </div>
                 <img
-                  src="https://blog.mascotaysalud.com/wp-content/uploads/2019/05/CACHORRO-BEAGLE.jpg"
-                  class="card-img-top img-grid"
-                  alt="Imagen de la publicación"
-                >
+                  src="https://media.istockphoto.com/id/2163211455/es/foto/a-side-profile-of-a-white-head-with-colorful-lines-of-paint-flowing-out-of-it-therapeutic.jpg?s=612x612&w=0&k=20&c=NM21zX3Y2788LwP4SB_hVUoSwObqLx9uG42ZtvdiiAE="
+                  class="card-img-top"
+                  alt="Imagen 6"
+                />
                 <div class="card-body">
-                  <p class="text-muted">Likes: 123</p>
+                  <p class="text-muted">Likes: 240k</p>
                   <p class="card-text">
-                    Aquí va la descripción de la publicación. Puedes incluir detalles adicionales que consideres necesarios.
+                    Una obra vibrante llena de dinamismo y pasión.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 7: Publicación "Momentos Compartidos" -->
+            <div class="col-12 d-flex justify-content-center mb-3">
+              <div class="card" style="max-width: 600px">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Momentos Compartidos</h5>
+                  <span class="text-muted">12/11</span>
+                </div>
+                <img
+                  src="https://media.istockphoto.com/id/2045181608/es/foto/two-middle-aged-diverse-couples-on-staycation-in-delft.jpg?s=612x612&w=0&k=20&c=olsJZUCxOkiCzJKJTBI7mefeJWBwq0Q2PmkAIAIPx-M="
+                  class="card-img-top"
+                  alt="Imagen 7"
+                />
+                <div class="card-body">
+                  <p class="text-muted">Likes: 4.5k</p>
+                  <p class="card-text">
+                    Dos parejas disfrutando de un viaje relajado, celebrando la amistad y la diversidad en Delft.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 8: Publicación "Aventura en los Alpes" -->
+            <div class="col-12 d-flex justify-content-center mb-3">
+              <div class="card" style="max-width: 600px">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0"> Aventura en los Alpes</h5>
+                  <span class="text-muted">12/08</span>
+                </div>
+                <img
+                  src="https://media.istockphoto.com/id/2150167174/es/foto/woman-hiking-near-limmerensee-lake-in-swiss-alps.jpg?s=612x612&w=0&k=20&c=pjdQrUWooDVRp4-O6k_fvFOsImVdWnHD0BG0gB2K0ok="
+                  class="card-img-top"
+                  alt="Imagen 8"
+                />
+                <div class="card-body">
+                  <p class="text-muted">Likes: 210k</p>
+                  <p class="card-text">
+                    Una caminata llena de libertad y determinación entre montañas suizas y paisajes de ensueño.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 9: Publicación "Aroma y Tradición" -->
+            <div class="col-12 d-flex justify-content-center mb-3">
+              <div class="card" style="max-width: 600px">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Aroma y Tradición</h5>
+                  <span class="text-muted">12/11</span>
+                </div>
+                <img
+                  src="https://media.istockphoto.com/id/1499143152/es/foto/secado-de-varita-de-incienso-en-vietnam.jpg?s=612x612&w=0&k=20&c=K5tkeGC3-mfq9h2YTLnKHH19gl5oBFq1ESpS3OC7_yE="
+                  class="card-img-top"
+                  alt="Imagen 9"
+                />
+                <div class="card-body">
+                  <p class="text-muted">Likes: 20k</p>
+                  <p class="card-text">
+                    El ritual del secado de varitas de incienso en Vietnam, un símbolo de espiritualidad y cultura milenaria.
                   </p>
                 </div>
               </div>
@@ -284,7 +470,10 @@
       </div>
     </div>
 
-    <!-- JS Bootstrap -->
+    <!-- ===================================================== -->
+    <!-- Inclusión del JavaScript de Bootstrap para funcionalidades interactivas -->
+    <!-- (pestañas, modal, dropdown, etc.) -->
+    <!-- ===================================================== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
