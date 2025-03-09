@@ -1,0 +1,7 @@
+
+.img-grid {
+    height: 300px;           /* altura fija (puedes ajustarla) */
+    width: 50%;            /* siempre ancho completo */
+    object-fit: cover;      /* recorta sin deformar */
+}
+
